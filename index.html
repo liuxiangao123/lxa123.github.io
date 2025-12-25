@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣诞快乐！🎄</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面背景与整体布局 */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0b2e, #2e1065, #1e3a8a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: "Microsoft YaHei", "Arial", sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 圣诞祝福文案样式 */
+        .christmas-wish {
+            text-align: center;
+            z-index: 10; /* 确保文案在雪花上层 */
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .wish-title {
+            font-size: 3rem;
+            color: #ff4757;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #ff4757, 0 0 20px #ff3838;
+            animation: blink 2s infinite alternate;
+        }
+
+        .wish-content {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .christmas-tree {
+            font-size: 5rem;
+            margin: 20px 0;
+            animation: sway 3s infinite alternate;
+        }
+
+        /* 雪花样式与动画 */
+        .snowflake {
+            position: absolute;
+            color: #ffffff;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            user-select: none;
+            animation: snowfall linear infinite;
+        }
+
+        /* 关键帧动画：文字闪烁 */
+        @keyframes blink {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        /* 关键帧动画：圣诞树晃动 */
+        @keyframes sway {
+            from {
+                transform: rotate(-5deg);
+            }
+            to {
+                transform: rotate(5deg);
+            }
+        }
+
+        /* 关键帧动画：雪花飘落 */
+        @keyframes snowfall {
+            0% {
+                top: -10%;
+                transform: translateX(0) rotate(0deg);
+            }
+            100% {
+                top: 100%;
+                transform: translateX(50px) rotate(360deg);
+            }
+        }
+
+        /* 响应式适配手机端 */
+        @media (max-width: 768px) {
+            .wish-title {
+                font-size: 2rem;
+            }
+            .wish-content {
+                font-size: 1.2rem;
+            }
+            .christmas-tree {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 圣诞祝福内容 -->
+    <div class="christmas-wish">
+        <div class="christmas-tree">🎄</div>
+        <h1 class="wish-title">圣诞快乐！</h1>
+        <p class="wish-content">愿星光为你铺路，麋鹿为你送福<br>愿这个圣诞节，温暖与你相伴，快乐与你同行</p>
+    </div>
+
+    <!-- JavaScript：生成雪花动画 -->
+    <script>
+        // 创建雪花的函数
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            
+            // 随机雪花样式与位置
+            snowflake.textContent = '❄️';
+            const randomX = Math.random() * window.innerWidth;
+            const randomSize = Math.random() * 15 + 5; // 雪花大小5-20px
+            const randomDuration = Math.random() * 10 + 5; // 飘落时长5-15s
+            
+            // 设置雪花样式
+            snowflake.style.left = `${randomX}px`;
+            snowflake.style.fontSize = `${randomSize}px`;
+            snowflake.style.animationDuration = `${randomDuration}s`;
+            
+            // 添加到页面
+            document.body.appendChild(snowflake);
+            
+            // 雪花落地后移除
+            setTimeout(() => {
+                snowflake.remove();
+            }, randomDuration * 1000);
+        }
+
+        // 持续生成雪花（每100毫秒生成一个）
+        setInterval(createSnowflake, 100);
+
+        // 页面加载完成后自动播放
+        window.onload = function() {
+            // 可选：添加欢迎提示
+            console.log('圣诞祝福网页加载完成～');
+        };
+    </script>
+</body>
+</html>
